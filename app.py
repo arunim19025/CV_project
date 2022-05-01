@@ -38,9 +38,15 @@ class app:
         self.imgs = None
 
 
-    def overlay(self, base, fabric):
-        st.write(base, fabric)
-        return 'overlaid image'
+    def overlay(self, surface, base, fabric):
+        sz = (600, 600)
+        if(surface == 'walls'):
+            sz = (1200, 800)
+
+        path = 'output/' + surface + '/' + base + fabric + '.png'
+        result = Image.open(path).resize(sz)
+        colcol = st.columns([1, 1 , 10, 1, 1])
+        colcol[2].image(result, caption = base + ' ' + fabric)
 
 
     def construct_sidebar(self, blabels, flabels):
@@ -118,8 +124,7 @@ class app:
         else:
             colsplit = st.columns(21)
             if(colsplit[10].button('OVERLAY')):
-                results = self.overlay(base, fabric)
-                st.write(results)
+                self.overlay(surface, base, fabric)
 
 
 
