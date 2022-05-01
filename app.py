@@ -40,12 +40,15 @@ class app:
 
     def overlay(self, surface, base, fabric):
         sz = (600, 600)
+        cll = [1, 1 , 10, 1, 1]
         if(surface == 'walls'):
             sz = (1200, 800)
+        if(surface == 'cushions'):
+            cll[1] = 4
 
         path = 'output/' + surface + '/' + base + fabric + '.png'
         result = Image.open(path).resize(sz)
-        colcol = st.columns([1, 1 , 10, 1, 1])
+        colcol = st.columns(cll)
         colcol[2].image(result, caption = base + ' ' + fabric)
 
 
